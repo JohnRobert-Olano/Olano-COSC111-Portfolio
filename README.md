@@ -55,9 +55,9 @@ This portfolio documents my coursework and laboratory activities for **COSC 111*
 
 Most projects in this portfolio require a split setup between the Hardware (Arduino) and the Software (Computer).
 
-1.  **Upload Firmware:** Open the `.ino` file in the `Arduino_Firmware` folder of the specific activity and upload it to your board.
-2.  **Close Serial Monitor:** If using a Python script, you must close the Arduino IDE Serial Monitor to free up the port.
-3.  **Run Python:** Navigate to the `Python_Backend` or `Python_Controller` folder and run:
+1. **Upload Firmware:** Open the `.ino` file in the `Arduino_Firmware` folder of the specific activity and upload it to your board.
+2. **Close Serial Monitor:** If using a Python script, you must close the Arduino IDE Serial Monitor to free up the port.
+3. **Run Python:** Navigate to the `Python_Backend` or `Python_Controller` folder and run:
     ```bash
     pip install -r requirements.txt  # If applicable, or install pyserial/fastapi manually
     python main.py
@@ -67,9 +67,7 @@ Most projects in this portfolio require a split setup between the Hardware (Ardu
 
 # 📘 Technical Guide & Codebase Architecture
 
-This document provides a detailed breakdown of the logic, algorithms, and hardware integration used in the **COSC 111 Internet of Things** portfolio. It explains how the firmware (Arduino) interacts with the software (Python/Web) and the physical hardware.
-
----
+This section provides a detailed breakdown of the logic, algorithms, and hardware integration used throughout the portfolio. It explains how the firmware (Arduino) interacts with the software (Python/Web) and the physical hardware.
 
 ## 🟢 Part 1: Embedded Logic & Sensors
 
@@ -124,9 +122,9 @@ This document provides a detailed breakdown of the logic, algorithms, and hardwa
 **Project:** Bi-Directional Communication
 * **The Problem:** Implementing a full-duplex control loop where hardware inputs are processed by external software.
 * **Data Flow:**
-    1.  **Hardware:** Button press sends a character (e.g., `'R'`) to the computer.
-    2.  **Software (Python):** Receives the character, processes the logic, and sends a command back (e.g., `'1'`).
-    3.  **Hardware:** Arduino receives the command and toggles the LED.
+    1. **Hardware:** Button press sends a character (e.g., `'R'`) to the computer.
+    2. **Software (Python):** Receives the character, processes the logic, and sends a command back (e.g., `'1'`).
+    3. **Hardware:** Arduino receives the command and toggles the LED.
 * **Constraint:** Buttons do not control LEDs locally; the signal must travel to the Python script and back.
 
 ### 7. HTTP-to-Serial Bridge (Lab 7)
@@ -142,7 +140,7 @@ This document provides a detailed breakdown of the logic, algorithms, and hardwa
 * **The Problem:** Triggering a remote network API endpoint from a physical button.
 * **Code Logic:**
     * **Hardware Debounce:** The Arduino implements a software debouncing algorithm with a 50ms delay to ensure clean detection.
-    * **Python Gateway:** The script continuously monitors the serial port. Upon receiving a specific Group ID (`3`), it constructs a dynamic API request to a specific URL (`http://172.20...`).
+    * **Python Gateway:** The script continuously monitors the serial port. Upon receiving a specific Group ID (`3`), it constructs a dynamic API request to a specific URL.
 
 ---
 
