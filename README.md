@@ -28,26 +28,27 @@ This portfolio documents my coursework and laboratory activities for **COSC 111*
 
 | Activity | Project Name | Description | Key Concepts |
 | :--- | :--- | :--- | :--- |
-| **Lab 1** | **[Running Light Sequence](./Lab_Activity_1)** | A sequential LED lighting circuit that demonstrates digital output control and timing loops. | `digitalWrite`, `delay`, Loops |
-| **Lab 3** | **[Fire Sensor Simulation](./Lab_Activity_3)** | An automated alarm system that triggers a buzzer/LED when heat and light thresholds are exceeded. | `analogRead`, `if/else`, Thermistor/LDR |
-| **Lab 4** | **[Latching Serial Alarm](./Lab_Activity_4)** | A security system logic where an alarm "latches" (stays on) after a trigger until manually reset via Serial command. | State Flags, Boolean Logic, Serial Monitor |
+| **Lab 1** | **LED-Sequential-Control** | A sequential LED lighting circuit that demonstrates digital output control and timing loops. | `digitalWrite`, `delay`, Loops |
+| **Lab 2** | **Analog-Output-Fading** | Demonstrates analog signal simulation using Pulse Width Modulation (PWM) to create a "breathing" or fading LED effect. | `analogWrite`, PWM, Arrays |
+| **Lab 3** | **Light-Intensity-Meter** | An automated alarm system that triggers a buzzer/LED when heat and light thresholds are exceeded. | `analogRead`, `if/else`, Thermistor/LDR |
+| **Lab 4** | **Arduino-Serial-Connection** | A security system logic where an alarm "latches" (stays on) after a trigger until manually reset via Serial command. | State Flags, Boolean Logic, Serial Monitor |
 
 ### 🟡 Part 2: Advanced Logic & State Machines
 *Complex control flows and user-configurable systems.*
 
 | Activity | Project Name | Description | Key Concepts |
 | :--- | :--- | :--- | :--- |
-| **Midterm** | **[Light Intensity Meter](./Midterm_Exam)** | A smart metering system with two modes: **Automatic** (fixed thresholds) and **Manual** (user-defined thresholds via CLI). | State Machines, String Parsing, EEPROM (Conceptual) |
+| **Midterm** | **Light-Intensity-Meter** | A smart metering system with two modes: **Automatic** (fixed thresholds) and **Manual** (user-defined thresholds via CLI). | State Machines, String Parsing, EEPROM (Conceptual) |
 
 ### 🔴 Part 3: Python Integration & Full-Stack IoT
 *Bridging hardware with software using Python and Web Technologies.*
 
 | Activity | Project Name | Description | Key Concepts |
 | :--- | :--- | :--- | :--- |
-| **Lab 5** | **[Python Serial Controller](./Lab_Activity_5)** | A Python script that acts as a remote control for the Arduino, allowing LED manipulation via keyboard commands. | `PySerial`, Python Scripting, Remote Control |
-| **Lab 6** | **[Bi-Directional Relay](./Lab_Activity_6)** | A "Software-in-the-Loop" system where Arduino buttons send data to Python, which processes logic and sends commands back to LEDs. | Full-Duplex, Loopback Logic, Latency Management |
-| **Lab 7** | **[HTTP Web Control](./Lab_Activity_7)** | A modern IoT architecture using a **Web Browser** to control hardware. Uses **FastAPI** to bridge HTTP requests to Serial commands. | **FastAPI**, REST, JavaScript Fetch, CORS |
-| **Final** | **[Physical-to-Cloud API Bridge](./Final_Exam)** | The capstone project: A physical button press on Arduino triggers a remote network API call via a Python gateway. | LAN Networking, HTTP Requests, Middleware |
+| **Lab 5** | **Python-Serial-Integration** | A Python script that acts as a remote control for the Arduino, allowing LED manipulation via keyboard commands. | `PySerial`, Python Scripting, Remote Control |
+| **Lab 6** | **Python-Serial-Input-Output** | A "Software-in-the-Loop" system where Arduino buttons send data to Python, which processes logic and sends commands back to LEDs. | Full-Duplex, Loopback Logic, Latency Management |
+| **Lab 7** | **FastAPI-Arduino-Integration** | A modern IoT architecture using a **Web Browser** to control hardware. Uses **FastAPI** to bridge HTTP requests to Serial commands. | **FastAPI**, REST, JavaScript Fetch, CORS |
+| **Final** | **Group-3-Serial-API-Bridge** | The capstone project: A physical button press on Arduino triggers a remote network API call via a Python gateway. | LAN Networking, HTTP Requests, Middleware |
 
 ---
 
@@ -71,7 +72,7 @@ This section provides a detailed breakdown of the logic, algorithms, and hardwar
 
 ## 🟢 Part 1: Embedded Logic & Sensors
 
-### 1. Sequential Control (Lab 1)
+### 1. LED-Sequential-Control (Lab 1)
 **Project:** Running Light Circuit
 * **The Problem:** Controlling multiple outputs with precise timing using digital signals.
 * **Code Logic:**
@@ -79,7 +80,15 @@ This section provides a detailed breakdown of the logic, algorithms, and hardwar
     * **Sequential Loop:** The `loop()` writes a `HIGH` signal to the first LED (Green/Pin 12), waits for 1000ms using `delay()`, and proceeds to the next.
     * **State Reset:** After the "Turn ON" sequence, the code executes a "Turn OFF" sequence in the same order.
 
-### 2. Multi-Sensor Conditional Logic (Lab 3)
+### 2. Analog-Output-Fading (Lab 2)
+**Project:** Analog Signal Generation
+* **The Problem:** Standard digital pins are binary (only ON or OFF) and cannot control variable intensity like brightness or speed.
+* **Code Logic:**
+    * **PWM Implementation:** Uses `analogWrite()` on specific PWM-enabled pins (indicated by `~` on the board) to simulate analog voltage values between 0 and 255.
+    * **Efficient Pin Management:** Replaces repetitive variable declarations with an integer array `LedPINS[]` containing the PWM pin numbers (6, 11, 10, 9, 5).
+    * **Loop Initialization:** Utilizes a `while` loop within `setup()` to iterate through the array and configure all pins as **OUTPUT**s efficiently.
+
+### 3. Fire-Sensor-Simulation (Lab 3)
 **Project:** Fire Sensor Simulation
 * **The Problem:** Reading analog environmental data and making decisions based on multiple variables simultaneously.
 * **Code Logic:**
@@ -87,7 +96,7 @@ This section provides a detailed breakdown of the logic, algorithms, and hardwar
     * **Compound Conditionals:** The alarm triggers only when **BOTH** heat and light intensity exceed their safety thresholds.
     * **Input Types:** Reads from `A0` (Thermistor) and `A2` (Photoresistor) using analog input pins.
 
-### 3. State-Latching Logic (Lab 4)
+### 4. Fire-Sensor-Simulation (Lab 4)
 **Project:** Serial Alarm System
 * **The Problem:** Creating an alarm that stays "latched" (active) even if the sensor value returns to normal.
 * **Code Logic:**
@@ -99,7 +108,7 @@ This section provides a detailed breakdown of the logic, algorithms, and hardwar
 
 ## 🟡 Part 2: Advanced Control Systems
 
-### 4. Dual-Mode State Machine (Midterm Exam)
+### 5. Light-Intensity-Meter (Midterm Exam)
 **Project:** Light Intensity Meter
 * **The Problem:** Building a system that can switch behaviors (Auto vs. Manual) at runtime.
 * **Code Logic:**
@@ -111,14 +120,14 @@ This section provides a detailed breakdown of the logic, algorithms, and hardwar
 
 ## 🔴 Part 3: Python & Full-Stack Integration
 
-### 5. Uni-Directional Serial Control (Lab 5)
+### 6. Python-Serial-Integration (Lab 5)
 **Project:** Python LED Controller
 * **The Problem:** Controlling hardware from a desktop application via Serial connection.
 * **Code Logic:**
     * **Python Logic:** A script runs a non-terminating `while True` loop to allow repeated commands without restarting. It converts inputs to lowercase to ensure case-insensitivity (e.g., 'r' and 'R' are treated identically).
     * **Arduino Logic:** The firmware listens for specific single-character commands to toggle Red (8), Green (9), or Blue (10) LEDs.
 
-### 6. "Software-in-the-Loop" Relay (Lab 6)
+### 7. Python-Serial-Input-Output (Lab 6)
 **Project:** Bi-Directional Communication
 * **The Problem:** Implementing a full-duplex control loop where hardware inputs are processed by external software.
 * **Data Flow:**
@@ -127,7 +136,7 @@ This section provides a detailed breakdown of the logic, algorithms, and hardwar
     3. **Hardware:** Arduino receives the command and toggles the LED.
 * **Constraint:** Buttons do not control LEDs locally; the signal must travel to the Python script and back.
 
-### 7. HTTP-to-Serial Bridge (Lab 7)
+### 8. FastAPI-Arduino-Integration (Lab 7)
 **Project:** Web-Controlled IoT
 * **The Problem:** Controlling hardware via a Web Browser using HTTP protocols.
 * **Full Stack Logic:**
@@ -135,7 +144,7 @@ This section provides a detailed breakdown of the logic, algorithms, and hardwar
     * **Middleware:** A **FastAPI** server receives the requests (e.g., `GET /led/on`) and translates them into Serial commands.
     * **Backend:** The Arduino receives the translated command and toggles the physical LEDs.
 
-### 8. Physical-to-Cloud Trigger (Final Exam)
+### 9. Serial-API-Bridge (Final Exam)
 **Project:** Serial API Bridge
 * **The Problem:** Triggering a remote network API endpoint from a physical button.
 * **Code Logic:**
